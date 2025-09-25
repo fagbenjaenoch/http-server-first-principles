@@ -1,6 +1,6 @@
 import net from "net";
 
-const socket = net.createServer();
+const server = net.createServer();
 
 function newConn(socket: net.Socket) {
 	console.log(
@@ -8,11 +8,12 @@ function newConn(socket: net.Socket) {
 	);
 
 	socket.on("end", () => {
-		console.log("received FIN");
+		console.log("received FIN\n\n");
 	});
 
 	socket.on("data", (data: Buffer) => {
 		if (data.length > 0) {
+			console.log("data:\n", data.toLocaleString())
 			socket.write(data);
 		}
 
@@ -23,6 +24,9 @@ function newConn(socket: net.Socket) {
 	});
 }
 
-socket.on("connection", newConn);
+server.on('error', (err: Error) => {
+	throw err
+})
+server.on("connection", newConn);
 console.log("server listening on port 8080");
-socket.listen("8080");
+server.listen("8080");
