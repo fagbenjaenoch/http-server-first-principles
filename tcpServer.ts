@@ -20,6 +20,7 @@ function newConn(socket: net.Socket) {
 		if (data.includes("q")) {
 			console.log("closing...");
 			socket.end();
+			socket.destroy();
 		}
 	});
 }
