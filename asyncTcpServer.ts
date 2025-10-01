@@ -114,5 +114,6 @@ async function newConn(socket: net.Socket) {
 	}
 }
 
+server.on("connection", newConn);
 console.log("listening on port 8090");
 server.listen("8090");

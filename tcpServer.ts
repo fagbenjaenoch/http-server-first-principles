@@ -13,7 +13,7 @@ function newConn(socket: net.Socket) {
 
 	socket.on("data", (data: Buffer) => {
 		if (data.length > 0) {
-			console.log("data:\n", data.toLocaleString())
+			console.log("data:\n", data.toLocaleString());
 			socket.write(data);
 		}
 
@@ -24,9 +24,9 @@ function newConn(socket: net.Socket) {
 	});
 }
 
-server.on('error', (err: Error) => {
-	throw err
-})
+server.on("error", (err: Error) => {
+	throw err;
+});
 server.on("connection", newConn);
 console.log("server listening on port 8080");
 server.listen("8080");
